@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-портфолио LeadUp AI</title>
+  <meta name="description" content="Портфолио AI-проектов LeadUp AI — 7 приложений на React + Gemini API: SaaS BoardRoom, Webuilding Academy, Speaker AI Mentor, AI-Архитектор, VentureOS, AI Sales Coach, AxiomAI.">
+  <meta property="og:title" content="AI-портфолио LeadUp AI">
+  <meta property="og:description" content="7 AI-native приложений: от виртуального совета директоров до AI-коуча для спикеров.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://portfolio.leadup.guru">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-hl: #27272a;
+      --border: #3f3f46;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --accent: #6366f1;
+      --accent-glow: rgba(99,102,241,0.15);
+      --orange: #f97316;
+      --emerald: #10b981;
+      --purple: #8b5cf6;
+      --blue: #3b82f6;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.2);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Categories */
+    .categories {
+      padding: 0 0 60px;
+    }
+    .cat-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .cat-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--surface-hl);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .cat-btn.active { background: rgba(99,102,241,0.15); }
+
+    /* Project Cards */
+    .projects {
+      padding: 0 0 100px;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(99,102,241,0.1);
+    }
+    .card-screenshot {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface-hl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-screenshot-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-screenshot-placeholder svg { opacity: 0.3; }
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-category {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .card-features {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .card-features li {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 3px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .card-features li::before {
+      content: '▸';
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tech-badge {
+      background: var(--surface-hl);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+    .card-link svg { width: 14px; height: 14px; }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer-brand {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding: 60px 0 40px; }
+      .hero-stats { gap: 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">AI Studio Portfolio</div>
+      <h1>Мы строим<br><span>AI-native продукты</span></h1>
+      <p>7 приложений, созданных с нуля на React + Google Gemini API. От виртуального совета директоров до AI-коуча для спикеров — каждый проект решает реальную бизнес-задачу.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">7</div>
+          <div class="hero-stat-label">Проектов</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">React + Gemini</div>
+          <div class="hero-stat-label">Стек</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">4</div>
+          <div class="hero-stat-label">Категории</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filters -->
+  <section class="categories">
+    <div class="container">
+      <div class="cat-filters">
+        <button class="cat-btn active" data-cat="all">Все проекты</button>
+        <button class="cat-btn" data-cat="founder">Founder Tools</button>
+        <button class="cat-btn" data-cat="edtech">EdTech</button>
+        <button class="cat-btn" data-cat="sales">Sales / GTM</button>
+        <button class="cat-btn" data-cat="creator">Creator Tools</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects">
+    <div class="container">
+      <div class="projects-grid">
+
+        <!-- 1. SaaS-BoardRoom-AI -->
+        <article class="project-card" data-cats="founder">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Founder Tools</div>
+            <h3 class="card-title">SaaS BoardRoom AI</h3>
+            <p class="card-desc">Виртуальный Board of Directors для SaaS-фаундеров. Три AI-агента с разными характерами дебатируют стратегию стартапа, анализируют питч-дек и выдают PDF-резолюции.</p>
+            <ul class="card-features">
+              <li>3 AI-персоны: Growth, Product, CTO</li>
+              <li>RAG-анализ документов и KPI-дашборд</li>
+              <li>Strategy Synthesis и Action Tracker</li>
+              <li>Board Resolution PDF с подписями</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 18</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Gemini API</span>
+              <span class="tech-badge">Supabase</span>
+              <span class="tech-badge">Recharts</span>
+              <span class="tech-badge">Express</span>
+            </div>
+            <a href="https://github.com/leadup-ai/SaaS-BoardRoom-AI" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 2. Webuilding-Academy-AI -->
+        <article class="project-card" data-cats="edtech">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">EdTech</div>
+            <h3 class="card-title">Webuilding Academy AI</h3>
+            <p class="card-desc">Комплексная образовательная платформа с AI-наставником, геймификацией и набором инструментов для стартапов: Idea Validator, JTBD Analyzer, Feature Architect.</p>
+            <ul class="card-features">
+              <li>AI-наставник (Floating Widget) в реальном времени</li>
+              <li>Геймификация: очки, уровни, ачивки</li>
+              <li>Builder Tools: валидация идей и подбор стека</li>
+              <li>Менторская и административная панели</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Gemini API</span>
+              <span class="tech-badge">Firebase</span>
+              <span class="tech-badge">Recharts</span>
+              <span class="tech-badge">Tailwind</span>
+            </div>
+            <a href="https://github.com/vnagin/Webuilding-Academy-AI" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 3. Speaker-AI-Mentor -->
+        <article class="project-card" data-cats="creator">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Creator Tools</div>
+            <h3 class="card-title">Speaker AI Mentor</h3>
+            <p class="card-desc">AI-коуч для спикеров. Генерация идей и структуры презентаций, персональная обратная связь, симулятор Q&A с каверзными вопросами, анализ выступлений.</p>
+            <ul class="card-features">
+              <li>AI-ментор с персональными советами</li>
+              <li>Симулятор Q&A — тренировка ответов</li>
+              <li>Performance Analysis выступлений</li>
+              <li>Экспорт в PDF и PPTX</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Gemini API</span>
+              <span class="tech-badge">Tailwind</span>
+              <span class="tech-badge">RBAC</span>
+            </div>
+            <a href="https://github.com/vnagin/Speaker-AI-Mentor" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 4. AI-Architect -->
+        <article class="project-card" data-cats="edtech">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">EdTech</div>
+            <h3 class="card-title">AI-Архитектор</h3>
+            <p class="card-desc">Образовательная платформа курса «От Прототипа к Продакшену». 7 модулей: от основ AI-архитектуры до деплоя и масштабирования. Интерактивные уроки, квизы, отслеживание прогресса.</p>
+            <ul class="card-features">
+              <li>7 модулей: RAG, агенты, vector DB, evals</li>
+              <li>Интерактивные уроки с квизами</li>
+              <li>Дашборд прогресса студента</li>
+              <li>AI-native подход к архитектуре</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">React Router</span>
+              <span class="tech-badge">Tailwind</span>
+            </div>
+            <a href="https://github.com/vnagin/AI-Architect" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 5. VentureOS-AI -->
+        <article class="project-card" data-cats="founder">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Founder Tools</div>
+            <h3 class="card-title">VentureOS AI</h3>
+            <p class="card-desc">Операционная система для ранних VC-фондов. AI-оркестрация агентов для сорсинга сделок, due diligence, управления портфелем и LP-отчётности.</p>
+            <ul class="card-features">
+              <li>Kanban-воркфлоу сделок (Sourcing → Closed)</li>
+              <li>AI-агенты для сорсинга и анализа</li>
+              <li>LP-отчёты и Cap Table калькулятор</li>
+              <li>Product Hunt-интеграция</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Gemini API</span>
+              <span class="tech-badge">Recharts</span>
+              <span class="tech-badge">IndexedDB</span>
+            </div>
+            <a href="https://github.com/vnagin/VentureOS-AI" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 6. AI-Sales-Coach -->
+        <article class="project-card" data-cats="sales">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Sales / GTM</div>
+            <h3 class="card-title">AI Sales Coach</h3>
+            <p class="card-desc">Элитная AI-платформа для обучения отделов продаж. Симулятор возражений, мгновенный анализ звонков, KPI-дашборд здоровья команды, геймификация и Лига Продаж.</p>
+            <ul class="card-features">
+              <li>Симулятор возражений с AI-клиентом</li>
+              <li>Мгновенный анализ транскрипций звонков</li>
+              <li>Дашборд здоровья команды и KPI</li>
+              <li>Геймификация и Лига Продаж</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Gemini API</span>
+              <span class="tech-badge">IndexedDB</span>
+              <span class="tech-badge">Tailwind</span>
+            </div>
+            <a href="https://github.com/vnagin/AI-Sales-Coach" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 7. AxiomAI -->
+        <article class="project-card" data-cats="edtech">
+          <div class="card-screenshot">
+            <div class="card-screenshot-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">EdTech</div>
+            <h3 class="card-title">AxiomAI Course Studio</h3>
+            <p class="card-desc">«Преврати знания в продукты мгновенно». Создание микрокурсов, вебинаров, лид-магнитов и маркетинговых воронок силами AI. Генерация изображений и нейро-озвучка.</p>
+            <ul class="card-features">
+              <li>Micro-Course Generator за секунды</li>
+              <li>AI-генерация изображений + TTS озвучка</li>
+              <li>Marketing Co-Pilot: посты, email, лендинги</li>
+              <li>Экспорт в PDF и PPTX</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tech-badge">React 18</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Gemini 3 Pro</span>
+              <span class="tech-badge">Imagen</span>
+              <span class="tech-badge">TTS</span>
+              <span class="tech-badge">Tailwind</span>
+            </div>
+            <a href="https://github.com/leadup-ai/AxiomAI" class="card-link" target="_blank" rel="noopener">
+              Исходный код <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">LeadUp AI</div>
+      <div class="footer-links">
+        <a href="https://leadup.guru" target="_blank" rel="noopener">leadup.guru</a>
+        <a href="https://blog.leadup.guru" target="_blank" rel="noopener">Блог</a>
+        <a href="https://community.leadup.guru" target="_blank" rel="noopener">Нейросборка</a>
+        <a href="https://github.com/leadup-ai" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 LeadUp AI. AI-first компания.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.project-card').forEach(card => {
+          if (cat === 'all' || card.dataset.cats.includes(cat)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
