@@ -3,6 +3,8 @@
 Страница портфолио AI-проектов компании LeadUp AI.
 Опубликована на [portfolio.leadup.guru](https://portfolio.leadup.guru).
 
+Дизайн: LeadUp AI v3 (D2 Cold Technical · C3 Teal · TS1 Geist).
+
 ## Проекты
 
 | Проект | Категория | Репозиторий |
@@ -14,6 +16,7 @@
 | VentureOS AI | Founder Tools | [vnagin/VentureOS-AI](https://github.com/vnagin/VentureOS-AI) |
 | AI Sales Coach | Sales / GTM | [vnagin/AI-Sales-Coach](https://github.com/vnagin/AI-Sales-Coach) |
 | AxiomAI Course Studio | EdTech | [leadup-ai/AxiomAI](https://github.com/leadup-ai/AxiomAI) |
+| Pulse Insight | Analytics | [leadup-ai/pulse-insight](https://github.com/leadup-ai/pulse-insight) |
 
 ## Деплой
 
