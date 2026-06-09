@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio AI — LeadUp AI</title>
+  <meta name="description" content="Portafolio de proyectos LeadUp AI — 8 aplicaciones AI-nativas: desde una junta directiva virtual hasta una redacción con IA para canales de Telegram.">
+  <meta name="theme-color" content="#0A1229">
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicons/site.webmanifest">
+
+  <meta property="og:title" content="Portafolio AI — LeadUp AI">
+  <meta property="og:description" content="8 apps AI-nativas construidas con React + Gemini API: SaaS BoardRoom, Webuilding Academy, Speaker AI Mentor, AI Architect, VentureOS, AI Sales Coach, AxiomAI, Pulse Insight.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://portfolio.leadup.guru/es/">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap');
+
+    /* ============================================================
+       Design Tokens — LeadUp AI v3 (D2 Cold Technical · C3 Teal)
+       ============================================================ */
+    :root {
+      --teal:            #00E5C7;
+      --teal-hover:      #14F5D7;
+      --teal-tint:       rgba(0, 229, 199, 0.12);
+      --teal-tint-2:     rgba(0, 229, 199, 0.20);
+      --teal-glow:       0 0 24px rgba(0, 229, 199, 0.45);
+
+      --bg-0:            #050807;
+      --bg-1:            #0A0F0D;
+      --bg-2:            #0F1512;
+      --bg-3:            #141B18;
+      --bg-4:            #1B2420;
+      --bg-5:            #253029;
+
+      --fg-1:            #EDEFEE;
+      --fg-2:            rgba(237, 239, 238, 0.72);
+      --fg-3:            rgba(237, 239, 238, 0.52);
+      --fg-4:            rgba(237, 239, 238, 0.36);
+
+      --border-1:        rgba(255, 255, 255, 0.06);
+      --border-2:        rgba(255, 255, 255, 0.10);
+      --border-3:        rgba(255, 255, 255, 0.18);
+
+      --font-sans:       'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      --font-mono:       'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+      --r-lg:            8px;
+      --r-xl:            10px;
+      --r-2xl:           14px;
+      --r-3xl:           20px;
+
+      --ease:            cubic-bezier(0.2, 0, 0, 1);
+      --shadow-2:        0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      --shadow-3:        0 12px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      --shadow-teal:     0 0 0 1px var(--teal), 0 8px 24px rgba(0, 229, 199, 0.28);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background: var(--bg-1);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--fg-1);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg-1);
+      color: var(--fg-1);
+      min-height: 100vh;
+    }
+
+    a { color: var(--teal); text-decoration: none; transition: color 120ms var(--ease); }
+    a:hover { color: var(--teal-hover); }
+
+    ::selection { background: var(--teal-tint-2); color: var(--fg-1); }
+
+    :where(button, a, input, select, [tabindex]):focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--bg-1), 0 0 0 4px var(--teal);
+      border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      padding: 120px 0 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-bg .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 35%, transparent 72%);
+    }
+    .hero-bg .glow {
+      position: absolute;
+      left: 50%;
+      top: -240px;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0,229,199,0.15) 0%, transparent 50%);
+    }
+    .pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-2);
+      padding: 6px 14px;
+      border: 1px solid var(--border-2);
+      border-radius: 100px;
+      background: rgba(20,27,24,0.5);
+      backdrop-filter: blur(8px);
+      margin-bottom: 24px;
+    }
+    .pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 10px var(--teal);
+      animation: pill-pulse 2s ease-in-out infinite;
+    }
+    @keyframes pill-pulse { 50% { opacity: 0.4; } }
+    .hero h1 {
+      position: relative;
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.04;
+      margin-bottom: 20px;
+    }
+    .hero h1 .acc {
+      background: linear-gradient(90deg, #14F5D7, #00E5C7, #00CBB0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .hero p {
+      position: relative;
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--fg-2);
+      max-width: 620px;
+      margin: 0 auto 36px;
+    }
+    .hero-stats {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-val {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--teal);
+      font-variant-numeric: tabular-nums;
+    }
+    .hero-stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-4);
+      margin-top: 8px;
+    }
+
+    /* ---------- CATEGORY FILTERS ---------- */
+    .cat-section { padding: 0 0 16px; }
+    .cat-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+    .filter {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 7px 15px;
+      border-radius: 9999px;
+      background: var(--bg-3);
+      border: 1px solid var(--border-1);
+      color: var(--fg-3);
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: all 120ms var(--ease);
+    }
+    .filter:hover { border-color: var(--border-3); color: var(--fg-1); }
+    .filter.on {
+      background: var(--teal-tint);
+      border-color: rgba(0,229,199,0.25);
+      color: var(--teal);
+    }
+
+    /* ---------- PROJECTS GRID ---------- */
+    .projects { padding: 0 0 100px; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--bg-2);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      transition: all 200ms var(--ease);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: var(--border-3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-3);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-4);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-img-placeholder svg { opacity: 0.2; }
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-cat {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--fg-3);
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .card-features {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .card-features li {
+      font-size: 13px;
+      color: var(--fg-3);
+      padding: 3px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .card-features li::before {
+      content: '▸';
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      background: var(--bg-4);
+      border: 1px solid var(--border-1);
+      color: var(--fg-3);
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--teal);
+      text-decoration: none;
+      transition: gap 120ms var(--ease);
+    }
+    .card-link:hover { gap: 9px; }
+    .card-link svg { width: 14px; height: 14px; }
+
+    /* ---------- CTA ---------- */
+    .cta { padding: 0 0 100px; }
+    .cta-band {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--bg-2), var(--bg-3));
+      border: 1px solid rgba(0,229,199,0.2);
+      border-radius: var(--r-3xl);
+      padding: 64px 48px;
+      text-align: center;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 540px;
+      background: radial-gradient(circle, rgba(0,229,199,0.14), transparent 55%);
+      pointer-events: none;
+    }
+    .cta-band h2 {
+      position: relative;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      margin: 0 0 14px;
+      line-height: 1.05;
+    }
+    .cta-band p {
+      position: relative;
+      font-size: 17px;
+      color: var(--fg-2);
+      margin: 0 0 28px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px 22px;
+      border-radius: var(--r-lg);
+      border: 0;
+      cursor: pointer;
+      transition: all 120ms var(--ease);
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: var(--font-sans);
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #061210;
+    }
+    .btn-primary:hover {
+      background: var(--teal-hover);
+      box-shadow: var(--teal-glow);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--bg-4);
+      color: var(--fg-1);
+      border: 1px solid var(--border-2);
+    }
+    .btn-secondary:hover { background: var(--bg-5); border-color: var(--border-3); }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      border-top: 1px solid var(--border-1);
+      padding: 48px 0 32px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.025em;
+      color: var(--fg-1);
+    }
+    .footer-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--teal);
+      color: #061210;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+    }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--fg-3);
+      text-decoration: none;
+      transition: color 120ms var(--ease);
+    }
+    .footer-links a:hover { color: var(--fg-1); }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fg-4);
+      letter-spacing: 0.04em;
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-1);
+    }
+
+    /* ---------- LANG SWITCHER ---------- */
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 24px;
+      z-index: 100;
+      display: flex;
+      gap: 2px;
+      background: var(--bg-3);
+      border: 1px solid var(--border-1);
+      border-radius: 100px;
+      padding: 3px;
+      backdrop-filter: blur(8px);
+    }
+    .lang-switcher a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 100px;
+      color: var(--fg-3);
+      text-decoration: none;
+      transition: all 120ms var(--ease);
+    }
+    .lang-switcher a:hover { color: var(--fg-1); }
+    .lang-switcher a.active {
+      background: var(--teal-tint);
+      color: var(--teal);
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding: 80px 0 48px; }
+      .hero-stats { gap: 28px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .cta-band { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="lang-switcher" aria-label="Language switcher">
+    <a href="/ru/">RU</a>
+    <a href="/en/">EN</a>
+    <a href="/es/" class="active">ES</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="grid"></div>
+      <div class="glow"></div>
+    </div>
+    <div class="container">
+      <div class="pill"><span class="dot"></span>AI Studio Portfolio</div>
+      <h1>Construimos<br><span class="acc">productos AI-nativos</span></h1>
+      <p>8 aplicaciones construidas desde cero con React + Google Gemini API. Desde una junta directiva virtual hasta una redacción con IA para canales de Telegram — cada proyecto resuelve un problema real.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">8</div>
+          <div class="hero-stat-label">Proyectos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">React + Gemini</div>
+          <div class="hero-stat-label">Stack</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">5</div>
+          <div class="hero-stat-label">Categorías</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat-section">
+    <div class="container">
+      <div class="cat-filters">
+        <button class="filter on" data-cat="all">All Proyectos</button>
+        <button class="filter" data-cat="founder">Founder Tools</button>
+        <button class="filter" data-cat="edtech">EdTech</button>
+        <button class="filter" data-cat="sales">Sales / GTM</button>
+        <button class="filter" data-cat="creator">Creator Tools</button>
+        <button class="filter" data-cat="analytics">Analytics</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="container">
+      <div class="projects-grid">
+
+        <!-- 1. SaaS BoardRoom AI -->
+        <article class="card" data-cats="founder">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Founder Tools</div>
+            <h3>SaaS BoardRoom AI</h3>
+            <p>Junta Directiva virtual para fundadores SaaS. Tres agentes de IA con personalidades distintas debaten la estrategia del startup, analizan pitch decks y generan resoluciones en PDF.</p>
+            <ul class="card-features">
+              <li>3 personajes IA: Growth, Product, CTO</li>
+              <li>Análisis RAG de documentos y dashboard KPI</li>
+              <li>Síntesis de estrategia y Action Tracker</li>
+              <li>PDF de resolución con firmas</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Gemini API</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Recharts</span>
+              <span class="tag">Express</span>
+            </div>
+            <a href="https://github.com/leadup-ai/SaaS-BoardRoom-AI" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 2. Webuilding Academy AI -->
+        <article class="card" data-cats="edtech">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">EdTech</div>
+            <h3>Webuilding Academy AI</h3>
+            <p>Plataforma educativa integral con mentor IA, gamificación y herramientas para startups: Validador de Ideas, Analizador JTBD, Arquitecto de Features.</p>
+            <ul class="card-features">
+              <li>Mentor IA en tiempo real (Floating Widget)</li>
+              <li>Gamificación: puntos, niveles, logros</li>
+              <li>Builder Tools: validación de ideas y selección de stack</li>
+              <li>Paneles de mentor y administrador</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Gemini API</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Recharts</span>
+              <span class="tag">Tailwind</span>
+            </div>
+            <a href="https://github.com/vnagin/Webuilding-Academy-AI" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 3. Speaker AI Mentor -->
+        <article class="card" data-cats="creator">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Creator Tools</div>
+            <h3>Speaker AI Mentor</h3>
+            <p>Coach de IA para oradores. Genera ideas y estructura de presentaciones, recibe feedback personalizado, practica con un simulador de preguntas difíciles y analiza tu desempeño.</p>
+            <ul class="card-features">
+              <li>Mentor IA con consejos personalizados</li>
+              <li>Simulador Q&A — entrenamiento de respuestas</li>
+              <li>Análisis de desempeño de charlas</li>
+              <li>Exportación a PDF y PPTX</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Gemini API</span>
+              <span class="tag">Tailwind</span>
+              <span class="tag">RBAC</span>
+            </div>
+            <a href="https://github.com/vnagin/Speaker-AI-Mentor" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 4. AI Architect -->
+        <article class="card" data-cats="edtech">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">EdTech</div>
+            <h3>AI Architect</h3>
+            <p>Plataforma educativa del curso «Del Prototipo a Producción». 7 módulos: desde fundamentos de arquitectura IA hasta deployment y escalado. Lecciones interactivas, quizzes, seguimiento de progreso.</p>
+            <ul class="card-features">
+              <li>7 módulos: RAG, agentes, vector DB, evals</li>
+              <li>Lecciones interactivas con quizzes</li>
+              <li>Dashboard de progreso del estudiante</li>
+              <li>Enfoque AI-nativo de arquitectura</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">React Router</span>
+              <span class="tag">Tailwind</span>
+            </div>
+            <a href="https://github.com/vnagin/AI-Architect" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 5. VentureOS AI -->
+        <article class="card" data-cats="founder">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Founder Tools</div>
+            <h3>VentureOS AI</h3>
+            <p>Sistema operativo para fondos VC en etapa temprana. Agentes orquestados por IA para sourcing de deals, due diligence, gestión de portafolio y reportes LP.</p>
+            <ul class="card-features">
+              <li>Workflow Kanban de deals (Sourcing → Closed)</li>
+              <li>Agentes IA para sourcing y análisis</li>
+              <li>Reportes LP y calculadora Cap Table</li>
+              <li>Integración con Product Hunt</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Gemini API</span>
+              <span class="tag">Recharts</span>
+              <span class="tag">IndexedDB</span>
+            </div>
+            <a href="https://github.com/vnagin/VentureOS-AI" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 6. AI Sales Coach -->
+        <article class="card" data-cats="sales">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Sales / GTM</div>
+            <h3>AI Sales Coach</h3>
+            <p>Plataforma élite de IA para entrenamiento de equipos de ventas. Simulador de objeciones, análisis instantáneo de llamadas, dashboard de salud del equipo, gamificación y Liga de Ventas.</p>
+            <ul class="card-features">
+              <li>Simulador de objeciones con cliente IA</li>
+              <li>Análisis instantáneo de transcripciones</li>
+              <li>Dashboard de salud de equipo y KPIs</li>
+              <li>Gamificación y Liga de Ventas</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Gemini API</span>
+              <span class="tag">IndexedDB</span>
+              <span class="tag">Tailwind</span>
+            </div>
+            <a href="https://github.com/vnagin/AI-Sales-Coach" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 7. AxiomAI Course Studio -->
+        <article class="card" data-cats="edtech">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">EdTech</div>
+            <h3>AxiomAI Course Studio</h3>
+            <p>«Convierte conocimiento en productos al instante». Crea micro-cursos, webinars, lead magnets y embudos de marketing con IA. Generación de imágenes y voz AI incluida.</p>
+            <ul class="card-features">
+              <li>Generador de Micro-Cursos en segundos</li>
+              <li>Generación de imágenes IA + voz TTS</li>
+              <li>Marketing Co-Pilot: posts, email, landing pages</li>
+              <li>Exportación a PDF y PPTX</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Gemini 3 Pro</span>
+              <span class="tag">Imagen</span>
+              <span class="tag">TTS</span>
+              <span class="tag">Tailwind</span>
+            </div>
+            <a href="https://github.com/leadup-ai/AxiomAI" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 8. Pulse Insight -->
+        <article class="card" data-cats="analytics">
+          <div class="card-img">
+            <div class="card-img-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Скриншот появится здесь</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Analytics</div>
+            <h3>Pulse Insight</h3>
+            <p>AI Newsroom Console — plataforma de inteligencia competitiva y automatización de contenido para canales de Telegram. Monitoreo de fuentes, analítica de tendencias IA y autopilotaje de publicaciones.</p>
+            <ul class="card-features">
+              <li>Monitoreo de canales competidores (MTProto)</li>
+              <li>Clustering de tendencias IA y detección de narrativas</li>
+              <li>Editor IA de posts con generación de variantes</li>
+              <li>Publicación, calendario y analítica de alcance</li>
+            </ul>
+            <div class="card-tech">
+              <span class="tag">Next.js 15</span>
+              <span class="tag">Genkit</span>
+              <span class="tag">Gemini 2.5 Pro/Flash</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Stripe</span>
+              <span class="tag">MTProto</span>
+            </div>
+            <a href="https://github.com/leadup-ai/pulse-insight" class="card-link" target="_blank" rel="noopener">
+              Código fuente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta-band">
+        <h2>¿Listo para construir tu producto AI?</h2>
+        <p>De la idea a producción — construimos aplicaciones AI-nativas que resuelven problemas reales de negocio y entregan resultados medibles.</p>
+        <a href="https://leadup.guru" class="btn btn-primary" target="_blank" rel="noopener">
+          Hablar del proyecto
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-mark">L</div>
+          LeadUp AI
+        </div>
+        <div class="footer-links">
+          <a href="https://leadup.guru" target="_blank" rel="noopener">leadup.guru</a>
+          <a href="https://blog.leadup.guru" target="_blank" rel="noopener">Blog</a>
+          <a href="https://community.leadup.guru" target="_blank" rel="noopener">Neurosborka</a>
+          <a href="https://github.com/leadup-ai" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2026 LeadUp AI. AI-first company.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.card').forEach(card => {
+          if (cat === 'all' || card.dataset.cats.includes(cat)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
