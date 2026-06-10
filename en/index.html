@@ -308,6 +308,27 @@
       color: var(--teal);
       margin-bottom: 10px;
     }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .card-meta .card-cat { margin-bottom: 0; }
+    .card-status {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: transparent;
+      border: 1px solid var(--border-1);
+      color: var(--fg-3);
+      flex-shrink: 0;
+    }
     .card h3 {
       font-size: 19px;
       font-weight: 600;
@@ -592,7 +613,7 @@
             <img src="/assets/og/og-saas-boardroom-ai.png" alt="SaaS BoardRoom AI screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Founder Tools</div>
+            <div class="card-meta"><div class="card-cat">Founder Tools</div><span class="card-status">MVP</span></div>
             <h3>SaaS BoardRoom AI</h3>
             <p>Virtual Board of Directors for SaaS founders. Three AI agents with distinct personalities debate startup strategy, analyze pitch decks, and produce PDF resolutions.</p>
             <ul class="card-features">
@@ -624,7 +645,7 @@
             <img src="/assets/og/og-webuilding-academy.png" alt="Webuilding Academy AI screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">EdTech</div>
+            <div class="card-meta"><div class="card-cat">EdTech</div><span class="card-status">MVP</span></div>
             <h3>Webuilding Academy AI</h3>
             <p>Comprehensive educational platform with an AI mentor, gamification, and a suite of startup tools: Idea Validator, JTBD Analyzer, Feature Architect.</p>
             <ul class="card-features">
@@ -656,7 +677,7 @@
             <img src="/assets/og/og-speaker-ai-mentor.png" alt="Speaker AI Mentor screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Creator Tools</div>
+            <div class="card-meta"><div class="card-cat">Creator Tools</div><span class="card-status">MVP</span></div>
             <h3>Speaker AI Mentor</h3>
             <p>AI coach for speakers. Generate presentation ideas and structure, receive personalized feedback, practice with a Q&A simulator tackling tough questions, and analyze performance.</p>
             <ul class="card-features">
@@ -687,7 +708,7 @@
             <img src="/assets/og/og-ai-architect.png" alt="AI Architect screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">EdTech</div>
+            <div class="card-meta"><div class="card-cat">EdTech</div><span class="card-status">MVP</span></div>
             <h3>AI Architect</h3>
             <p>Educational platform for the «From Prototype to Production» course. 7 modules: from AI architecture fundamentals to deployment and scaling. Interactive lessons, quizzes, progress tracking.</p>
             <ul class="card-features">
@@ -717,7 +738,7 @@
             <img src="/assets/og/og-venture-os.png" alt="VentureOS AI screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Founder Tools</div>
+            <div class="card-meta"><div class="card-cat">Founder Tools</div><span class="card-status">MVP</span></div>
             <h3>VentureOS AI</h3>
             <p>Operating system for early-stage VC funds. AI-orchestrated agents for deal sourcing, due diligence, portfolio management, and LP reporting.</p>
             <ul class="card-features">
@@ -748,7 +769,7 @@
             <img src="/assets/og/og-ai-sales-coach.png" alt="AI Sales Coach screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Sales / GTM</div>
+            <div class="card-meta"><div class="card-cat">Sales / GTM</div><span class="card-status">MVP</span></div>
             <h3>AI Sales Coach</h3>
             <p>Elite AI platform for sales team training. Objection simulator, instant call analysis, team health KPI dashboard, gamification, and Sales League.</p>
             <ul class="card-features">
@@ -779,7 +800,7 @@
             <img src="/assets/og/og-axiomai.png" alt="AxiomAI Course Studio screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">EdTech</div>
+            <div class="card-meta"><div class="card-cat">EdTech</div><span class="card-status">MVP</span></div>
             <h3>AxiomAI Course Studio</h3>
             <p>«Turn knowledge into products instantly». Create micro-courses, webinars, lead magnets, and marketing funnels powered by AI. Image generation and AI voiceover included.</p>
             <ul class="card-features">
@@ -811,7 +832,7 @@
             <img src="/assets/og/og-pulse-insight.png" alt="Pulse Insight screenshot" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Analytics</div>
+            <div class="card-meta"><div class="card-cat">Analytics</div><span class="card-status">MVP</span></div>
             <h3>Pulse Insight</h3>
             <p>AI Newsroom Console — competitive intelligence and content automation platform for Telegram channels. Source monitoring, AI trend analytics, and publishing autopilot.</p>
             <ul class="card-features">
