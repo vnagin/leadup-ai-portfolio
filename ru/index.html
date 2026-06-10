@@ -308,6 +308,27 @@
       color: var(--teal);
       margin-bottom: 10px;
     }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .card-meta .card-cat { margin-bottom: 0; }
+    .card-status {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: transparent;
+      border: 1px solid var(--border-1);
+      color: var(--fg-3);
+      flex-shrink: 0;
+    }
     .card h3 {
       font-size: 19px;
       font-weight: 600;
@@ -592,7 +613,7 @@
             <img src="/assets/og/og-saas-boardroom-ai.png" alt="Скриншот SaaS BoardRoom AI" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Founder Tools</div>
+            <div class="card-meta"><div class="card-cat">Founder Tools</div><span class="card-status">MVP</span></div>
             <h3>SaaS BoardRoom AI</h3>
             <p>Виртуальный Board of Directors для SaaS-фаундеров. Три AI-агента с разными характерами дебатируют стратегию стартапа, анализируют питч-дек и выдают PDF-резолюции.</p>
             <ul class="card-features">
@@ -624,7 +645,7 @@
             <img src="/assets/og/og-webuilding-academy.png" alt="Скриншот Webuilding Academy AI" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">EdTech</div>
+            <div class="card-meta"><div class="card-cat">EdTech</div><span class="card-status">MVP</span></div>
             <h3>Webuilding Academy AI</h3>
             <p>Комплексная образовательная платформа с AI-наставником, геймификацией и набором инструментов для стартапов: Idea Validator, JTBD Analyzer, Feature Architect.</p>
             <ul class="card-features">
@@ -656,7 +677,7 @@
             <img src="/assets/og/og-speaker-ai-mentor.png" alt="Скриншот Speaker AI Mentor" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Creator Tools</div>
+            <div class="card-meta"><div class="card-cat">Creator Tools</div><span class="card-status">MVP</span></div>
             <h3>Speaker AI Mentor</h3>
             <p>AI-коуч для спикеров. Генерация идей и структуры презентаций, персональная обратная связь, симулятор Q&A с каверзными вопросами, анализ выступлений.</p>
             <ul class="card-features">
@@ -687,7 +708,7 @@
             <img src="/assets/og/og-ai-architect.png" alt="Скриншот AI-Архитектор" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">EdTech</div>
+            <div class="card-meta"><div class="card-cat">EdTech</div><span class="card-status">MVP</span></div>
             <h3>AI-Архитектор</h3>
             <p>Образовательная платформа курса «От Прототипа к Продакшену». 7 модулей: от основ AI-архитектуры до деплоя и масштабирования. Интерактивные уроки, квизы, отслеживание прогресса.</p>
             <ul class="card-features">
@@ -717,7 +738,7 @@
             <img src="/assets/og/og-venture-os.png" alt="Скриншот VentureOS AI" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Founder Tools</div>
+            <div class="card-meta"><div class="card-cat">Founder Tools</div><span class="card-status">MVP</span></div>
             <h3>VentureOS AI</h3>
             <p>Операционная система для ранних VC-фондов. AI-оркестрация агентов для сорсинга сделок, due diligence, управления портфелем и LP-отчётности.</p>
             <ul class="card-features">
@@ -748,7 +769,7 @@
             <img src="/assets/og/og-ai-sales-coach.png" alt="Скриншот AI Sales Coach" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Sales / GTM</div>
+            <div class="card-meta"><div class="card-cat">Sales / GTM</div><span class="card-status">MVP</span></div>
             <h3>AI Sales Coach</h3>
             <p>Элитная AI-платформа для обучения отделов продаж. Симулятор возражений, мгновенный анализ звонков, KPI-дашборд здоровья команды, геймификация и Лига Продаж.</p>
             <ul class="card-features">
@@ -779,7 +800,7 @@
             <img src="/assets/og/og-axiomai.png" alt="Скриншот AxiomAI Course Studio" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">EdTech</div>
+            <div class="card-meta"><div class="card-cat">EdTech</div><span class="card-status">MVP</span></div>
             <h3>AxiomAI Course Studio</h3>
             <p>«Преврати знания в продукты мгновенно». Создание микрокурсов, вебинаров, лид-магнитов и маркетинговых воронок силами AI. Генерация изображений и нейро-озвучка.</p>
             <ul class="card-features">
@@ -811,7 +832,7 @@
             <img src="/assets/og/og-pulse-insight.png" alt="Скриншот Pulse Insight" loading="lazy" decoding="async" width="1200" height="630">
           </div>
           <div class="card-body">
-            <div class="card-cat">Analytics</div>
+            <div class="card-meta"><div class="card-cat">Analytics</div><span class="card-status">MVP</span></div>
             <h3>Pulse Insight</h3>
             <p>AI Newsroom Console — платформа конкурентной разведки и контент-автоматизации для Telegram-каналов. Мониторинг источников, AI-аналитика трендов и автопилотирование публикаций.</p>
             <ul class="card-features">
