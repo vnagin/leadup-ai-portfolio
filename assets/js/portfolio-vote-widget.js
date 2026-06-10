@@ -1,13 +1,21 @@
 /*!
- * Portfolio Vote Widget — «👍 Голосую за идею»
- * LeadUp AI · AI-портфолио (LEA-2872) · v3 teal стиль
+ * Portfolio Vote Widget — «♥ Лайк идее»
+ * LeadUp AI · AI-портфолио (LEA-2872, LEA-2898) · v3 teal стиль
  *
  * Встройка (Миша / Лена):
  *   1. Положить пустой контейнер туда, где нужна кнопка + счётчик:
  *        <div data-portfolio-vote="axiomai"></div>
  *      (data-portfolio-vote = projectSlug проекта)
  *   2. Подключить этот файл один раз на странице (карточная главная ИЛИ лендинг):
- *        <script src="/assets/portfolio-vote-widget.js" defer></script>
+ *        <script src="/assets/js/portfolio-vote-widget.js" defer></script>
+ *
+ * Варианты отображения (LEA-2898):
+ *   - в карточке (host внутри .card) → компактная иконка-сердечко «♥ N»
+ *     (экономит место на мобильном, не конфликтует с «Подробнее о проекте»);
+ *   - вне карточки (герой лендинга) → полная кнопка «♥ Лайк идее · N».
+ *   Можно форсировать явно: data-pv-variant="icon" | "full".
+ *
+ * Локализация подписи и aria-label берётся из <html lang> (ru/en/es), фолбэк — ru.
  *
  * Виджет сам:
  *   - один раз дёргает GET /portfolio-votes и проставляет все счётчики на странице;
@@ -25,7 +33,25 @@
   var ENDPOINT_VOTES = API_BASE + "/portfolio-votes";
   var LS_PREFIX = "pv_voted_"; // localStorage флаг на слаг
 
-  // ---- styв (инжектим один раз) ------------------------------------------
+  // ---- i18n ---------------------------------------------------------------
+  var I18N = {
+    ru: { vote: "Лайк идее",  voted: "Вам нравится", aria: "Поставить лайк идее" },
+    en: { vote: "Like idea",  voted: "You liked it",  aria: "Like this idea" },
+    es: { vote: "Me gusta",   voted: "Te gusta",      aria: "Dar me gusta a la idea" },
+  };
+  function t() {
+    var lang = (document.documentElement.getAttribute("lang") || "ru").slice(0, 2).toLowerCase();
+    return I18N[lang] || I18N.ru;
+  }
+
+  // SVG-сердечко (outline; заливка currentColor включается в состоянии «нравится»)
+  var HEART_SVG =
+    '<svg class="pv-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>' +
+    "</svg>";
+
+  // ---- стили (инжектим один раз) -----------------------------------------
   var CSS = [
     ".pv-btn{",
     "  --pv-teal: var(--teal, #00E5C7);",
@@ -46,8 +72,13 @@
     ".pv-btn:active:not([disabled]){transform:translateY(1px);color:var(--pv-teal-pressed);}",
     ".pv-btn[disabled]{cursor:default;opacity:1;}",
     ".pv-btn[aria-pressed='true']{background:var(--pv-teal);color:#04221d;border-color:var(--pv-teal);}",
-    ".pv-btn[aria-pressed='true'] .pv-emoji{filter:none;}",
-    ".pv-emoji{font-size:15px;line-height:1;}",
+    // сердечко
+    ".pv-heart{width:16px;height:16px;flex:none;transition:transform .18s var(--ease, ease), fill .18s;}",
+    ".pv-btn:hover:not([disabled]) .pv-heart{transform:scale(1.14);}",
+    ".pv-btn[aria-pressed='true'] .pv-heart{fill:currentColor;}",
+    // компактный вариант для карточек: только сердечко + счётчик
+    ".pv-btn--icon{gap:6px;padding:8px 12px;}",
+    // счётчик
     ".pv-count{font-variant-numeric:tabular-nums;font-feature-settings:'tnum';",
     "  min-width:1ch;text-align:left;}",
     ".pv-count-sep{opacity:.5;font-weight:400;}",
@@ -76,18 +107,30 @@
     if (n == null || isNaN(n)) return "0";
     return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
   }
+  // вариант отображения: явный data-pv-variant > авто (внутри .card → icon) > full
+  function variantFor(host) {
+    var explicit = host.getAttribute("data-pv-variant");
+    if (explicit === "icon" || explicit === "full") return explicit;
+    return host.closest && host.closest(".card") ? "icon" : "full";
+  }
 
-  function buildButton(slug) {
+  function buildButton(slug, variant) {
     var voted = hasVoted(slug);
+    var L = t();
+    var icon = variant === "icon";
     var btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "pv-btn";
+    btn.className = "pv-btn" + (icon ? " pv-btn--icon" : "");
     btn.setAttribute("data-pv-slug", slug);
     btn.setAttribute("aria-pressed", voted ? "true" : "false");
+    btn.setAttribute("aria-label", L.aria);
+    btn.setAttribute("title", L.aria);
     if (voted) btn.disabled = true;
     btn.innerHTML =
-      '<span class="pv-emoji" aria-hidden="true">👍</span>' +
-      '<span class="pv-label">' + (voted ? "Вы проголосовали" : "Голосую за идею") + "</span>" +
+      HEART_SVG +
+      (icon
+        ? ""
+        : '<span class="pv-label">' + (voted ? L.voted : L.vote) + "</span>") +
       '<span class="pv-count-sep">·</span>' +
       '<span class="pv-count" data-pv-count>—</span>';
     btn.addEventListener("click", function () { onVote(btn, slug); });
@@ -119,7 +162,7 @@
         btn.disabled = true;
         btn.setAttribute("aria-pressed", "true");
         var label = btn.querySelector(".pv-label");
-        if (label) label.textContent = "Вы проголосовали";
+        if (label) label.textContent = t().voted;
         if (typeof data.total === "number") setCount(btn, data.total);
       })
       .catch(function () {
@@ -138,8 +181,11 @@
     hosts.forEach(function (host) {
       var slug = host.getAttribute("data-portfolio-vote");
       if (!slug || host.querySelector(".pv-btn")) return;
-      var btn = buildButton(slug);
+      var variant = variantFor(host);
+      var btn = buildButton(slug, variant);
       host.appendChild(btn);
+      // в карточке прижимаем хост-контейнер вправо (ссылка слева, сердечко справа)
+      if (variant === "icon") host.style.marginLeft = "auto";
       (bySlug[slug] = bySlug[slug] || []).push(btn);
     });
     // один батч-запрос на все счётчики страницы
