@@ -43,6 +43,35 @@
   <url><loc>https://portfolio.leadup.guru/projects/ai-sales-coach/</loc><lastmod>2026-06-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://portfolio.leadup.guru/projects/axiomai/</loc><lastmod>2026-06-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://portfolio.leadup.guru/projects/pulse-insight/</loc><lastmod>2026-06-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://portfolio.leadup.guru/projects/flocksense/</loc><lastmod>2026-06-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url>
+    <loc>https://portfolio.leadup.guru/projects/flocksense/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://portfolio.leadup.guru/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.leadup.guru/en/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.leadup.guru/es/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.leadup.guru/projects/flocksense/"/>
+  </url>
+  <url>
+    <loc>https://portfolio.leadup.guru/en/projects/flocksense/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://portfolio.leadup.guru/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.leadup.guru/en/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.leadup.guru/es/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.leadup.guru/projects/flocksense/"/>
+  </url>
+  <url>
+    <loc>https://portfolio.leadup.guru/es/projects/flocksense/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://portfolio.leadup.guru/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio.leadup.guru/en/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://portfolio.leadup.guru/es/projects/flocksense/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio.leadup.guru/projects/flocksense/"/>
+  </url>
 
 </urlset>
