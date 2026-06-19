@@ -115,6 +115,13 @@
               "href": "/course/vibecoding",
               "kind": "internal",
               "icon": "sparkles"
+            },
+            {
+              "id": "mastermind",
+              "label": { "ru": "Мастермайнд", "en": "Mastermind" },
+              "href": "community.leadup.guru/mastermind/",
+              "kind": "cross",
+              "icon": "brand-eval-panel"
             }
           ]
         }
@@ -148,13 +155,6 @@
               "href": "community.leadup.guru/{locale}",
               "kind": "cross",
               "icon": "brand-neurosborka"
-            },
-            {
-              "id": "mastermind",
-              "label": { "ru": "Мастермайнд", "en": "Mastermind" },
-              "href": "community.leadup.guru/mastermind/",
-              "kind": "cross",
-              "icon": "brand-eval-panel"
             }
           ]
         }
