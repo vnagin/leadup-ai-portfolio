@@ -699,54 +699,139 @@
     }
 
   </style>
+  <link rel="stylesheet" href="/assets/css/lg-meganav.css">
 </head>
 <body>
 
   <header class="lg-header">
-    <div class="lg-header__inner">
-      <a class="lg-brand" href="https://leadup.guru/en" aria-label="LeadUp AI" rel="noopener">
-        <img class="lg-brand__logo" src="/assets/brand/logo.png" alt="LeadUp AI" width="120" height="24">
-      </a>
-      <nav class="lg-nav" aria-label="Primary navigation">
-        <a href="https://leadup.guru/en/neuro-staff" rel="noopener">Neuro Staff</a>
-        <a href="https://community.leadup.guru/" rel="noopener">Community</a>
-        <a href="https://community.leadup.guru/mastermind/" rel="noopener">Mastermind</a>
-        <a href="https://blog.leadup.guru/" rel="noopener">Blog</a>
-        <a href="https://leadup.guru/en/about" rel="noopener">About</a>
-        <a href="https://leadup.guru/en/contact" rel="noopener">Contacts</a>
-      </nav>
-      <div class="lg-header__actions">
-        <div class="ds-langswitch" data-langswitch="true" data-open="false">
-        <button type="button" class="ds-langswitch__trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="lg-langpanel" aria-label="Change language, current: English">
-          <svg class="ds-langswitch__globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg><span class="ds-langswitch__current">EN</span><svg class="ds-langswitch__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="ds-langswitch__panel" id="lg-langpanel" role="listbox" aria-label="Interface language">
-          <p class="ds-langswitch__panel-head">Language / Язык</p>
-          <ul class="ds-langswitch__list">
-            <li><a class="ds-langswitch__opt" role="option" aria-selected="false" lang="ru" href="/ru/"><span class="ds-langswitch__opt-code">RU</span><span class="ds-langswitch__opt-name">Русский</span></a></li>
-            <li><a class="ds-langswitch__opt is-active" role="option" aria-selected="true" aria-current="true" lang="en" tabindex="0"><span class="ds-langswitch__opt-code">EN</span><span class="ds-langswitch__opt-name">English</span></a></li>
-            <li><a class="ds-langswitch__opt" role="option" aria-selected="false" lang="es" href="/es/"><span class="ds-langswitch__opt-code">ES</span><span class="ds-langswitch__opt-name">Español</span></a></li>
+      <div class="lg-header__inner">
+        <a class="lg-brand" href="https://leadup.guru/en/" aria-label="LeadUp AI">
+          <img class="lg-brand__logo" src="/assets/brand/logo.png" alt="LeadUp AI" width="120" height="24">
+        </a>
+        <nav class="lg-meganav" aria-label="Основная навигация">
+          <ul>
+          <li class="lg-meganav__item" data-dropdown data-current="true">
+            <button class="lg-meganav__trigger is-current" type="button" aria-expanded="false" aria-controls="mn-products">
+              Products
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--mega" id="mn-products">
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g0">Neuro staff & teams</p>
+                <ul aria-labelledby="mn-products-g0">
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/neuro-staff"><span class="lg-meganav__txt"><span class="lg-meganav__label">Neuro staff</span><span class="lg-meganav__desc">AI staff for your workflows</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/zero-human-company"><span class="lg-meganav__txt"><span class="lg-meganav__label">Zero-human companies</span><span class="lg-meganav__desc">Companies that run without humans</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/hermes"><span class="lg-meganav__txt"><span class="lg-meganav__label">Hermes — AI chief of staff</span><span class="lg-meganav__desc">AI lead for operations</span></span></a></li>
+                </ul>
+              </div>
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g1">Automation</p>
+                <ul aria-labelledby="mn-products-g1">
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/solutions/automation"><span class="lg-meganav__txt"><span class="lg-meganav__label">n8n automation</span><span class="lg-meganav__desc">Turnkey n8n workflows</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/ai-diagnostics"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI diagnostics</span><span class="lg-meganav__desc">Free process review</span></span></a></li>
+                </ul>
+              </div>
+              <div class="lg-meganav__group">
+                <p class="lg-meganav__heading" id="mn-products-g2">AI-native products</p>
+                <ul aria-labelledby="mn-products-g2">
+                <li><a class="lg-meganav__link" href="https://portfolio.leadup.guru/en"><span class="lg-meganav__txt"><span class="lg-meganav__label">Portfolio</span><span class="lg-meganav__desc">What we built with AI</span></span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="lg-meganav__item" data-dropdown>
+            <button class="lg-meganav__trigger" type="button" aria-expanded="false" aria-controls="mn-learn">
+              Learning
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--simple" id="mn-learn">
+              <div class="lg-meganav__group"><ul>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/neyromasterskaya-2"><span class="lg-meganav__txt"><span class="lg-meganav__label">Neuromasterskaya 2.0</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/courses/intensive"><span class="lg-meganav__txt"><span class="lg-meganav__label">Intensives</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/course/ai-automation"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI automation course</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/course/vibecoding"><span class="lg-meganav__txt"><span class="lg-meganav__label">Vibecoding</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+          <li class="lg-meganav__item" data-dropdown>
+            <button class="lg-meganav__trigger" type="button" aria-expanded="false" aria-controls="mn-resources">
+              Resources
+              <svg class="lg-meganav__chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="lg-meganav__panel lg-meganav__panel--simple" id="mn-resources">
+              <div class="lg-meganav__group"><ul>
+                <li><a class="lg-meganav__link" href="https://blog.leadup.guru/en"><span class="lg-meganav__txt"><span class="lg-meganav__label">Blog</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://leadup.guru/en/resources/ai-library"><span class="lg-meganav__txt"><span class="lg-meganav__label">AI library</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://community.leadup.guru/en"><span class="lg-meganav__txt"><span class="lg-meganav__label">Community</span></span></a></li>
+                <li><a class="lg-meganav__link" href="https://community.leadup.guru/mastermind/"><span class="lg-meganav__txt"><span class="lg-meganav__label">Mastermind</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+          <li class="lg-meganav__item">
+            <a class="lg-meganav__toplink" href="https://leadup.guru/en/about">About</a>
+          </li>
           </ul>
+        </nav>
+        <div class="lg-header__actions">
+          <div class="ds-langswitch" data-langswitch="true" data-open="false">
+            <button type="button" class="ds-langswitch__trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="lg-langpanel" aria-label="Сменить язык">
+              <svg class="ds-langswitch__globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="ds-langswitch__current">EN</span><svg class="ds-langswitch__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="ds-langswitch__panel" id="lg-langpanel" role="listbox">
+              <p class="ds-langswitch__panel-head">Язык / Language</p>
+              <ul class="ds-langswitch__list">
+                <li><a class="ds-langswitch__opt" role="option" lang="ru" href="/ru/"><span class="ds-langswitch__opt-code">RU</span><span class="ds-langswitch__opt-name">Русский</span></a></li>
+                <li><a class="ds-langswitch__opt is-active" role="option" lang="en" aria-current="true"><span class="ds-langswitch__opt-code">EN</span><span class="ds-langswitch__opt-name">English</span></a></li>
+                <li><a class="ds-langswitch__opt" role="option" lang="es" href="/es/"><span class="ds-langswitch__opt-code">ES</span><span class="ds-langswitch__opt-name">Español</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <a class="btn-p" href="https://leadup.guru/en/ai-diagnostics">AI diagnostics</a>
+          <details class="lg-mobile">
+            <summary aria-label="Меню"></summary>
+            <div class="lg-drawer">
+              <div class="lg-drawer__body">
+          <details class="lg-drawer__group" open>
+            <summary class="lg-drawer__group-trigger">Products <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <div class="lg-drawer__sub-head">Neuro staff & teams</div>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/neuro-staff">Neuro staff</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/zero-human-company">Zero-human companies</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/hermes">Hermes — AI chief of staff</a>
+            <div class="lg-drawer__sub-head">Automation</div>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/solutions/automation">n8n automation</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/ai-diagnostics">AI diagnostics</a>
+            <div class="lg-drawer__sub-head">AI-native products</div>
+            <a class="lg-drawer__link" href="https://portfolio.leadup.guru/en">Portfolio</a>
+          </details>
+          <details class="lg-drawer__group">
+            <summary class="lg-drawer__group-trigger">Learning <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/neyromasterskaya-2">Neuromasterskaya 2.0</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/courses/intensive">Intensives</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/course/ai-automation">AI automation course</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/course/vibecoding">Vibecoding</a>
+          </details>
+          <details class="lg-drawer__group">
+            <summary class="lg-drawer__group-trigger">Resources <svg class="lg-drawer__gchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <a class="lg-drawer__link" href="https://blog.leadup.guru/en">Blog</a>
+            <a class="lg-drawer__link" href="https://leadup.guru/en/resources/ai-library">AI library</a>
+            <a class="lg-drawer__link" href="https://community.leadup.guru/en">Community</a>
+            <a class="lg-drawer__link" href="https://community.leadup.guru/mastermind/">Mastermind</a>
+          </details>
+          <a class="lg-drawer__toplink" href="https://leadup.guru/en/about">About</a>
+          <div class="lg-drawer__foot">
+            <a class="btn-p" href="https://leadup.guru/en/ai-diagnostics">AI diagnostics</a>
+            <div class="lg-drawer__langs">
+            <a class="lg-drawer__lang" href="/ru/" hreflang="ru">RU</a>
+            <span class="lg-drawer__lang is-active">EN</span>
+            <a class="lg-drawer__lang" href="/es/" hreflang="es">ES</a>
+            </div>
+          </div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
-        <a class="btn-p" href="https://meet.leadup.guru/discuss/" rel="noopener">Start a project</a>
-        <details class="lg-mobile">
-          <summary aria-label="Menu"></summary>
-          <div class="lg-drawer">
-            <nav class="lg-drawer__nav" aria-label="Mobile navigation">
-              <a href="https://leadup.guru/en/neuro-staff" rel="noopener">Neuro Staff</a>
-        <a href="https://community.leadup.guru/" rel="noopener">Community</a>
-        <a href="https://community.leadup.guru/mastermind/" rel="noopener">Mastermind</a>
-        <a href="https://blog.leadup.guru/" rel="noopener">Blog</a>
-        <a href="https://leadup.guru/en/about" rel="noopener">About</a>
-        <a href="https://leadup.guru/en/contact" rel="noopener">Contacts</a>
-            </nav>
-            <a class="btn-p" href="https://meet.leadup.guru/discuss/" rel="noopener">Start a project</a>
-          </div>
-        </details>
-      </div>
-    </div>
-  </header>
+    </header>
 
   <section class="hero">
     <div class="hero-bg">
@@ -1052,7 +1137,7 @@
       <div class="cta-band">
         <h2>Ready to build your AI product?</h2>
         <p>From idea to production — we build AI-native applications that solve real business problems and deliver measurable results.</p>
-        <a href="https://meet.leadup.guru/discuss/en/" class="btn btn-primary" target="_blank" rel="noopener">
+        <a href="https://meet.leadup.guru/discuss/en/" class="btn btn-primary" rel="noopener">
           Discuss a project
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -1153,5 +1238,6 @@
     });
   })();
 </script>
+  <script defer src="/assets/js/lg-meganav.js"></script>
 </body>
 </html>

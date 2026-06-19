@@ -1,0 +1,171 @@
+{
+  "_comment": "Эталонная структура единого nav-config для всех 4 свойств LeadUp AI (leadup.guru, blog, community, portfolio). Источник: LEA-3517 mega-menu-ds-v3-spec-2026-06-19.md. href.kind резолвится хелпером resolveHref(item, currentDomain, locale): internal=путь без локали (на каноне относительный /{locale}/path, на субдомене абсолютный https://leadup.guru/{locale}/path); cross=другой наш субдомен (наследует локаль, тот же таб); external=внешний URL (target=_blank + rel=noopener). ES-фолбэк: internal на каноне es->en (только portfolio). Лейблы — ru/en; ES берёт en-лейблы.",
+  "version": 1,
+  "locales": ["ru", "en"],
+  "primaryCta": {
+    "id": "cta-diagnostics",
+    "label": { "ru": "Получить AI-диагностику", "en": "Get AI diagnostics" },
+    "href": "/ai-diagnostics",
+    "kind": "internal"
+  },
+  "items": [
+    {
+      "id": "products",
+      "type": "dropdown",
+      "variant": "mega",
+      "label": { "ru": "Продукты", "en": "Products" },
+      "groups": [
+        {
+          "heading": { "ru": "Нейросотрудники и команды", "en": "Neuro staff & teams" },
+          "links": [
+            {
+              "id": "neuro-staff",
+              "label": { "ru": "Нейросотрудники", "en": "Neuro staff" },
+              "desc": { "ru": "AI-сотрудники под ваши процессы", "en": "AI staff for your workflows" },
+              "href": "/neuro-staff",
+              "kind": "internal",
+              "icon": "brand-agent"
+            },
+            {
+              "id": "zero-human",
+              "label": { "ru": "Zero-human компании", "en": "Zero-human companies" },
+              "desc": { "ru": "Компании, которые работают без людей", "en": "Companies that run without humans" },
+              "href": "/zero-human-company",
+              "kind": "internal",
+              "icon": "brand-deploy"
+            },
+            {
+              "id": "hermes",
+              "label": { "ru": "Hermes — AI-заместитель", "en": "Hermes — AI chief of staff" },
+              "desc": { "ru": "AI-руководитель операционки", "en": "AI lead for operations" },
+              "href": "/hermes",
+              "kind": "internal",
+              "icon": "brand-handoff"
+            }
+          ]
+        },
+        {
+          "heading": { "ru": "Автоматизация", "en": "Automation" },
+          "links": [
+            {
+              "id": "automation",
+              "label": { "ru": "n8n-автоматизация", "en": "n8n automation" },
+              "desc": { "ru": "Сценарии под ключ на n8n", "en": "Turnkey n8n workflows" },
+              "href": "/solutions/automation",
+              "kind": "internal",
+              "icon": "brand-n8n"
+            },
+            {
+              "id": "ai-diagnostics",
+              "label": { "ru": "AI-диагностика", "en": "AI diagnostics" },
+              "desc": { "ru": "Бесплатный разбор процессов", "en": "Free process review" },
+              "href": "/ai-diagnostics",
+              "kind": "internal",
+              "icon": "brand-audit"
+            }
+          ]
+        },
+        {
+          "heading": { "ru": "AI-native продукты", "en": "AI-native products" },
+          "links": [
+            {
+              "id": "portfolio",
+              "label": { "ru": "Портфолио", "en": "Portfolio" },
+              "desc": { "ru": "Что мы собрали на AI", "en": "What we built with AI" },
+              "href": "portfolio.leadup.guru/{locale}",
+              "kind": "cross",
+              "icon": "layout-dashboard"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "type": "dropdown",
+      "variant": "simple",
+      "label": { "ru": "Обучение", "en": "Learning" },
+      "groups": [
+        {
+          "links": [
+            {
+              "id": "neyromasterskaya-2",
+              "label": { "ru": "Нейромастерская 2.0", "en": "Neuromasterskaya 2.0" },
+              "href": "/neyromasterskaya-2",
+              "kind": "internal",
+              "icon": "brand-neuromasterskaya"
+            },
+            {
+              "id": "intensive",
+              "label": { "ru": "Интенсивы", "en": "Intensives" },
+              "href": "/courses/intensive",
+              "kind": "internal",
+              "icon": "zap"
+            },
+            {
+              "id": "course-ai-automation",
+              "label": { "ru": "Курс AI-автоматизации", "en": "AI automation course" },
+              "href": "/course/ai-automation",
+              "kind": "internal",
+              "icon": "brand-automation"
+            },
+            {
+              "id": "vibecoding",
+              "label": { "ru": "Вайбкодинг", "en": "Vibecoding" },
+              "href": "/course/vibecoding",
+              "kind": "internal",
+              "icon": "sparkles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "type": "dropdown",
+      "variant": "simple",
+      "label": { "ru": "Ресурсы", "en": "Resources" },
+      "groups": [
+        {
+          "links": [
+            {
+              "id": "blog",
+              "label": { "ru": "Блог", "en": "Blog" },
+              "href": "blog.leadup.guru/{locale}",
+              "kind": "cross",
+              "icon": "brand-slack-digest"
+            },
+            {
+              "id": "ai-library",
+              "label": { "ru": "AI-библиотека", "en": "AI library" },
+              "href": "/resources/ai-library",
+              "kind": "internal",
+              "icon": "brand-prompt"
+            },
+            {
+              "id": "community",
+              "label": { "ru": "Сообщество «Нейросборка»", "en": "Community" },
+              "href": "community.leadup.guru/{locale}",
+              "kind": "cross",
+              "icon": "brand-neurosborka"
+            },
+            {
+              "id": "mastermind",
+              "label": { "ru": "Мастермайнд", "en": "Mastermind" },
+              "href": "community.leadup.guru/mastermind/",
+              "kind": "cross",
+              "icon": "brand-eval-panel"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "type": "link",
+      "label": { "ru": "О нас", "en": "About" },
+      "href": "/about",
+      "kind": "internal"
+    }
+  ]
+}

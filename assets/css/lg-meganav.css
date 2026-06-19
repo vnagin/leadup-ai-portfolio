@@ -1,0 +1,160 @@
+/* ============================================================
+   LeadUp AI — мега-меню (LEA-3519, sibling LEA-3518)
+   Сквозной MegaNav DS v3 — desktop dropdown + mobile <details>-drawer.
+   Расширяет существующий .lg-header без замены lg-shell.css.
+   Источник дизайна: vault/.../navigation/mega-menu-mock.html (LEA-3517).
+   ============================================================ */
+
+/* ===================== MEGANAV (desktop, >=1024px) ===================== */
+.lg-meganav { display: flex; align-items: center; margin-left: var(--sp-4, 16px); }
+.lg-meganav > ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; align-items: center; gap: 2px;
+}
+.lg-meganav__item { position: relative; }
+
+.lg-meganav__trigger,
+.lg-meganav__toplink {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono, 'Geist Mono', ui-monospace, monospace);
+  font-size: var(--text-sm, 13px); font-weight: var(--fw-medium, 500);
+  letter-spacing: 0.02em; color: var(--fg-3, rgba(237,239,238,.52));
+  background: transparent; border: 0;
+  padding: 8px 12px; border-radius: var(--r-md, 6px);
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: color 120ms var(--ease, cubic-bezier(.2,0,0,1)),
+              background-color 120ms var(--ease, cubic-bezier(.2,0,0,1));
+}
+.lg-meganav__trigger:hover,
+.lg-meganav__toplink:hover { color: var(--fg-1, #EDEFEE); background: var(--bg-4, #1B2420); }
+.lg-meganav__item[data-open="true"] .lg-meganav__trigger { color: var(--fg-1, #EDEFEE); background: var(--bg-4, #1B2420); }
+.lg-meganav__trigger.is-current,
+.lg-meganav__toplink.is-current { color: var(--fg-1, #EDEFEE); box-shadow: inset 0 -2px 0 var(--teal, #00E5C7); }
+.lg-meganav__chev { width: 12px; height: 12px; color: var(--fg-3, rgba(237,239,238,.52)); transition: transform 200ms var(--ease, cubic-bezier(.2,0,0,1)), color 120ms var(--ease, cubic-bezier(.2,0,0,1)); }
+.lg-meganav__item[data-open="true"] .lg-meganav__chev { transform: rotate(180deg); color: var(--teal, #00E5C7); }
+
+/* panel */
+.lg-meganav__panel {
+  position: absolute; top: calc(100% + 8px); inset-inline-start: 0;
+  z-index: 300;
+  background: rgba(15, 21, 18, 0.92);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  backdrop-filter: blur(18px) saturate(1.1);
+  border: 1px solid var(--border-2, rgba(255,255,255,.10));
+  border-radius: var(--r-xl, 10px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
+  opacity: 0; transform: translateY(-6px); visibility: hidden; pointer-events: none;
+  transition: opacity 200ms var(--ease, cubic-bezier(.2,0,0,1)),
+              transform 200ms var(--ease, cubic-bezier(.2,0,0,1)),
+              visibility 0s linear 200ms;
+}
+.lg-meganav__panel::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; } /* hover bridge */
+.lg-meganav__item[data-open="true"] .lg-meganav__panel {
+  opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto;
+  transition: opacity 200ms var(--ease, cubic-bezier(.2,0,0,1)),
+              transform 200ms var(--ease, cubic-bezier(.2,0,0,1)),
+              visibility 0s;
+}
+.lg-meganav__panel--mega {
+  padding: 16px;
+  display: grid; grid-template-columns: repeat(3, minmax(210px, 1fr));
+  gap: 24px; width: 720px;
+}
+.lg-meganav__panel--simple { padding: 8px; min-width: 280px; }
+
+.lg-meganav__heading {
+  margin: 0 0 8px; padding: 0 12px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-xs, 11px); font-weight: var(--fw-medium, 500);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-4, rgba(237,239,238,.36));
+}
+.lg-meganav__group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+
+.lg-meganav__link {
+  display: block; padding: 8px 12px; border-radius: var(--r-md, 6px);
+  border-inline-start: 2px solid transparent;
+  text-decoration: none; color: var(--fg-1, #EDEFEE);
+  transition: background-color 120ms var(--ease, cubic-bezier(.2,0,0,1));
+}
+.lg-meganav__link:hover,
+.lg-meganav__link:focus-visible { background: var(--bg-4, #1B2420); outline: none; }
+.lg-meganav__link.is-current { background: var(--teal-tint, rgba(0,229,199,.12)); border-inline-start-color: var(--teal, #00E5C7); }
+.lg-meganav__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lg-meganav__label {
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-size: var(--text-sm, 13px); font-weight: var(--fw-medium, 500);
+  color: var(--fg-1, #EDEFEE); line-height: 1.25;
+}
+.lg-meganav__desc {
+  font-size: var(--text-xs, 11px); color: var(--fg-3, rgba(237,239,238,.52));
+  line-height: 1.25; margin-top: 2px;
+  transition: color 120ms var(--ease, cubic-bezier(.2,0,0,1));
+}
+.lg-meganav__link:hover .lg-meganav__desc { color: var(--fg-2, rgba(237,239,238,.72)); }
+
+/* hide legacy .lg-nav when meganav present */
+.lg-header__inner .lg-nav { display: none; }
+
+/* ===================== MOBILE DRAWER (<=1023px) ===================== */
+@media (max-width: 1023px) {
+  .lg-meganav { display: none; }
+  .lg-header__actions .ds-langswitch { display: none; }
+  .lg-header__actions > .btn-p { display: none; }
+}
+@media (min-width: 1024px) {
+  .lg-mobile { display: none !important; }
+}
+
+/* enhanced drawer (overrides lg-shell.css flat drawer when groups present) */
+.lg-drawer__body { display: flex; flex-direction: column; gap: 0; }
+.lg-drawer__group {
+  border-bottom: 1px solid var(--border-1, rgba(255,255,255,.06));
+}
+.lg-drawer__group:last-of-type { border-bottom: 0; }
+.lg-drawer__group-trigger {
+  list-style: none; display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 4px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-base, 15px); font-weight: var(--fw-medium, 500);
+  color: var(--fg-1, #EDEFEE); cursor: pointer;
+}
+.lg-drawer__group-trigger::-webkit-details-marker { display: none; }
+.lg-drawer__group-trigger::marker { content: ""; }
+.lg-drawer__group[open] .lg-drawer__gchev { transform: rotate(180deg); color: var(--teal, #00E5C7); }
+.lg-drawer__gchev { width: 14px; height: 14px; color: var(--fg-3, rgba(237,239,238,.52)); transition: transform 200ms var(--ease, cubic-bezier(.2,0,0,1)); }
+.lg-drawer__sub-head {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-xs, 11px);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-4, rgba(237,239,238,.36));
+  padding: 10px 4px 4px;
+}
+.lg-drawer__link {
+  display: block; padding: 10px 4px;
+  color: var(--fg-1, #EDEFEE); text-decoration: none;
+  font-size: var(--text-base, 15px); line-height: 1.4;
+}
+.lg-drawer__link:hover { color: var(--teal, #00E5C7); }
+.lg-drawer__toplink {
+  display: block; padding: 14px 4px;
+  color: var(--fg-1, #EDEFEE); text-decoration: none;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-base, 15px); font-weight: var(--fw-medium, 500);
+  border-bottom: 1px solid var(--border-1, rgba(255,255,255,.06));
+}
+.lg-drawer__foot { padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+.lg-drawer__foot .btn-p { width: 100%; justify-content: center; }
+.lg-drawer__langs { display: flex; gap: 8px; }
+.lg-drawer__lang {
+  flex: 1; text-align: center; padding: 10px;
+  font-family: var(--font-mono, ui-monospace, monospace); font-size: var(--text-sm, 13px);
+  border: 1px solid var(--border-2, rgba(255,255,255,.10));
+  border-radius: var(--r-lg, 8px);
+  color: var(--fg-2, rgba(237,239,238,.72));
+  text-decoration: none; cursor: pointer;
+}
+.lg-drawer__lang.is-active {
+  color: var(--teal, #00E5C7); border-color: var(--teal, #00E5C7);
+  background: var(--teal-tint, rgba(0,229,199,.12));
+}
