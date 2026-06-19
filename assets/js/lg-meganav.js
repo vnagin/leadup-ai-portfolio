@@ -63,17 +63,7 @@
     if (e.key === 'Escape') closeAll(null);
   });
 
-  // ds-langswitch (если есть на portfolio)
-  document.querySelectorAll('.ds-langswitch').forEach(function (sw) {
-    var trigger = sw.querySelector('.ds-langswitch__trigger');
-    if (!trigger) return;
-    function lclose() { sw.setAttribute('data-open', 'false'); trigger.setAttribute('aria-expanded', 'false'); }
-    function lopen() { sw.setAttribute('data-open', 'true'); trigger.setAttribute('aria-expanded', 'true'); }
-    trigger.addEventListener('click', function (e) {
-      e.stopPropagation();
-      sw.getAttribute('data-open') === 'true' ? lclose() : lopen();
-    });
-    document.addEventListener('click', function (e) { if (!sw.contains(e.target)) lclose(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lclose(); });
-  });
+  // NB: .ds-langswitch is handled by the inline per-page script (single source of truth).
+  // The duplicate handler that used to live here double-bound the trigger click and
+  // cancelled itself out (open → immediately close), so the switcher appeared dead. (LEA-3539)
 })();
