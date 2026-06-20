@@ -110,7 +110,7 @@
   /* LEA-3599: drawer непрозрачный + на всю высоту,
      чтобы контент страницы не просвечивал (особенно там, где backdrop-filter не поддержан). */
   .lg-drawer {
-    inset-block-end: 0;
+    block-size: calc(100vh - 65px);
     max-block-size: none;
     background: var(--bg-1, #0A0F0D);
     -webkit-backdrop-filter: none;
