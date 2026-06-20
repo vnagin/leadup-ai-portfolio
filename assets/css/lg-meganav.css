@@ -97,10 +97,37 @@
 .lg-header__inner .lg-nav { display: none; }
 
 /* ===================== MOBILE DRAWER (<=1023px) ===================== */
+/* LEA-3599: до этой правки бургер показывался только при ≤840px (inline-стили portfolio HTML),
+   а десктоп-меганав прятался при ≤1023px → dead-zone 841–1023px без навигации.
+   Сводим брейкпоинт бургера к брейкпоинту меганава. */
 @media (max-width: 1023px) {
   .lg-meganav { display: none; }
+  .lg-header__inner .lg-nav { display: none; }
+  .lg-mobile { display: inline-block !important; }
   .lg-header__actions .ds-langswitch { display: none; }
   .lg-header__actions > .btn-p { display: none; }
+
+  /* LEA-3599: drawer непрозрачный + на всю высоту,
+     чтобы контент страницы не просвечивал (особенно там, где backdrop-filter не поддержан). */
+  .lg-drawer {
+    inset-block-end: 0;
+    max-block-size: none;
+    background: var(--bg-1, #0A0F0D);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* LEA-3599: иконка бургера крупнее и контрастнее (визуально читается как «меню»). */
+  .lg-mobile > summary {
+    inline-size: 44px;
+    block-size: 44px;
+    color: var(--fg-1, #EDEFEE);
+  }
+  .lg-mobile > summary::before {
+    inline-size: 20px;
+    block-size: 14px;
+    background-size: 100% 2px;
+  }
 }
 @media (min-width: 1024px) {
   .lg-mobile { display: none !important; }
