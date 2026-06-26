@@ -150,6 +150,13 @@
               "icon": "brand-prompt"
             },
             {
+              "id": "tools",
+              "label": { "ru": "Инструменты", "en": "Tools" },
+              "href": "/resources/tools",
+              "kind": "internal",
+              "icon": "brand-prompt"
+            },
+            {
               "id": "community",
               "label": { "ru": "Сообщество «Нейросборка»", "en": "Community" },
               "href": "community.leadup.guru/{locale}",
